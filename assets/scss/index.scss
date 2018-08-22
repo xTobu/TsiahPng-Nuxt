@@ -1,0 +1,175 @@
+@import './common';
+@import './dropdown';
+@import './burBox';
+@import './header';
+@import './footer';
+/****************************/
+
+/* wrap */
+
+div.wrap {
+    width: 100%;
+    section {
+        position: relative;
+    }
+    /* section.index */
+    section.index {
+        height: 100vh;
+        text-align: center;
+        div.main {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            ul li {
+                margin-bottom: 35px;
+            }
+            img.icon_kv {
+                width: 75px;
+            }
+            div.txt {
+                font-family: 'NotoSans-Thin';
+                font-size: 70px;
+                display: block;
+                text-shadow: 2px 2px 5px rgba(0, 0, 0, 1);
+                span {
+                    margin-bottom: 10px;
+                }
+                @media screen and (max-width: 767px) {
+                    font-size: 50px;
+                }
+            }
+            img.icon_arrow {
+                width: 50px;
+            }
+        }
+    }
+    /* section.filter */
+    section.filter {
+        text-align: center;
+        background-color: black;
+        div.main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 150px 15px;
+            div.content {
+                /* display: none */
+                p.tt {
+                    font-family: 'NotoSans-Thin';
+                    font-size: 60px;
+                    margin-bottom: 40px;
+                    @media screen and (max-width: 767px) {
+                        font-size: 40px;
+                    }
+                }
+                div.txt {
+                    font-family: 'Roboto-Thin';
+                    letter-spacing: 2px;
+                    line-height: 1.5;
+                    font-size: 19px;
+                    margin-bottom: 40px;
+                    padding: 0 30px;
+                    text-align: justify;
+                    @media screen and (max-width: 767px) {
+                        font-family: 'Roboto-Thin';
+                        letter-spacing: 2px;
+                        line-height: 1.5;
+                        font-size: 17px;
+                    }
+                }
+                a.button {
+                    font-family: 'STFangsong';
+                    font-size: 19px;
+                    margin-bottom: 20px;
+                }
+                a.switch {
+                    font-family: 'Roboto-Thin';
+                    font-size: 15px;
+                    /* letter-spacing: 0.5px; */
+                    text-decoration: underline;
+                }
+                div.setting {
+                    // display: none;
+                }
+            }
+            div.random {
+                ul {
+                    margin-bottom: 50px;
+                    text-align: justify;
+                    li {
+                        display: inline-block;
+                        text-align: left;
+                        p {
+                            font-family: 'STFangsong';
+                            font-size: 19px;
+                            line-height: 1.5;
+                        }
+                        p.tt {
+                            font-family: 'STFangsong';
+                            font-size: 25px;
+                            line-height: 2;
+                        }
+                        img {
+                            width: 400px;
+                        }
+                    }
+                }
+                a.close {
+                    font-size: 19px;
+                    font-family: 'Roboto-Thin';
+                    margin-top: 50px;
+                    img {
+                        width: 50px;
+                        margin-right: 15px;
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+    }
+    /* section.inspired */
+    section.inspired {
+        background-color: rgba(0, 0, 0, 0.78);
+        text-align: center;
+        display: inline-block;
+        width: 100%;
+        div.main {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 100px 0px;
+            display: inline-block;
+            p.tt {
+                font-family: 'NotoSans-Thin';
+                font-size: 60px;
+                margin-bottom: 40px;
+                @media screen and (max-width: 767px) {
+                    font-size: 40px;
+                }
+            }
+            div.list ul li {
+                display: inline-block;
+                float: left;
+                width: 33%;
+                padding: 30px;
+                box-sizing: border-box;
+                div.content {
+                    width: 100%;
+                    text-align: left;
+                    img {
+                        width: 100%;
+                    }
+                    p {
+                        font-family: 'STFangsong';
+                        font-size: 19px;
+                        padding: 20px 0;
+                    }
+                } // tablet
+                @media (min-width: 768px) and (max-width: 1024px) {
+                    width: 50%;
+                } // m
+                @media screen and (max-width: 767px) {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

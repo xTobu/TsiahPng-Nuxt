@@ -1,65 +1,233 @@
 <template>
-  <section class="container">
     <div>
-      <app-logo/>
-      <h1 class="title">
-        tsiah-png
-      </h1>
-      <h2 class="subtitle">
-        Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey">GitHub</a>
-      </div>
+        <header>
+            <div class="inner" :style=" { left: this.state.burbox ? '0px' : '' }">
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="#" @click.prevent="funcGoto('index')">首　頁</a>
+                        </li>
+                        <li>
+                            <a href="#" @click.prevent="funcGoto('filter')">篩　選</a>
+                        </li>
+                        <li>
+                            <a href="#" @click.prevent="funcGoto('inspired')">找點子</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="burBox">
+                <a v-bind:class="{ bur: true, active: state.burbox }" @click.prevent="burboxClick($event)" @focusout="burboxFocusout($event)" href="javascript:void(0)">
+                    <span></span>
+                </a>
+            </div>
+            <!-- 改成從一個 Div 做 RWD -->
+            <!-- <div id="sidebar" class="sidebar" :style="{ left: state.burbox ? '0px':'-250px'}">
+            <a href="#" @click.prevent="funcGoto('index')">首　頁</a>
+            <a href="#" @click.prevent="funcGoto('filter')">篩　選</a>
+            <a href="#" @click.prevent="funcGoto('inspired')">找點子</a>                    
+        </div> -->
+
+        </header>
+        <div class="wrap">
+            <!-- 首頁 -->
+            <section class="index">
+                <div class="main">
+                    <ul>
+                        <li>
+                            <img class="icon_kv" src="~assets/images/icon_kv.png" alt="">
+                        </li>
+                        <li>
+                            <div class="txt">
+                                <p>
+                                    <span>What to eat</span>
+                                    <span>for</span>
+                                    <span>Lunch</span>
+                                </p>
+                            </div>
+
+                        </li>
+                        <li>
+                            <a href="#" @click.prevent="funcGoto('filter')">
+                                <img class="icon_arrow" src="~assets/images/icon_arrow.png" alt="">
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </section>
+            <!-- 篩選 -->
+            <section class="filter">
+                <div class="main">
+                    <div class="content" v-if="!state.random">
+                        <ul>
+                            <li>
+                                <p class="tt">No Idea For Eating?</p>
+                            </li>
+                            <li>
+                                <div class="txt">
+                                    <p>
+                                        <span>Do you ever fall into a lunch rut? Every week when planning my grocery list, I always pause when it comes to making a plan for the week's lunches. Turkey wraps again? It can be hard to find tasty and easy-to-prepare options that are also healthy.</span>
+                                    </p>
+                                </div>
+                                <div class="setting" v-if="state.switch !== 'more'">
+                                    <div class="dropdown" @click.prevent="dropdownClick($event)" @focusout="dropdownFocusout($event)" @focus="dropdownFocus($event)">
+                                        <div class="select">
+                                            <div class="inner">
+                                                <span>{{state.filter.price || '價錢區間'}}
+                                                </span>
+                                                <img :src="getImgUrl('icon_select_down.png')" alt="">
+                                            </div>
+                                        </div>
+                                        <ul class="dropdown-menu">
+                                            <li @click.prevent="dropdownLiClick($event)" v-for="(item, index) in setting.price" :key="index" data-filter="price">
+                                                {{ item }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="dropdown" @click.prevent="dropdownClick($event)" @focus="dropdownFocus($event)" @focusout="dropdownFocusout($event)">
+                                        <div class="select">
+                                            <div class="inner">
+                                                <span>{{state.filter.purpose || '用餐目的'}}
+                                                </span>
+                                                <img :src="getImgUrl('icon_select_down.png')" alt="">
+                                            </div>
+                                        </div>
+                                        <ul class="dropdown-menu">
+                                            <li @click.prevent="dropdownLiClick($event)" v-for="(item, index) in setting.purpose" :key="index" data-filter="purpose">
+                                                {{ item }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#" class="button" @click.prevent="funcGetRandom">
+                                    隨便給我吃的
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class='switch' @click.prevent="funcSwitch">
+                                    {{state.switch}} setting</a>
+
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="random" v-if="state.random">
+                        <ul>
+                            <li>
+                                <img :src="getImgUrl(randombox.img)" alt="">
+                            </li>
+                            <li style="width:40px"></li>
+                            <li>
+                                <p class="tt">{{randombox.name}}</p>
+                                <p>
+                                    <span>價錢區間：</span>{{randombox.price}}</p>
+                                <p>
+                                    <span>電話：</span>待補</p>
+                                <p>
+                                    <span>地址：</span>待補</p>
+
+                            </li>
+                        </ul>
+                        <a class="close" href="#" @click.prevent="funcGetRandom">
+                            <img src="~assets/images/icon_close.png" alt="">close</a>
+                    </div>
+
+                </div>
+            </section>
+            <!-- 找點子 -->
+            <section class="inspired">
+                <div class="main">
+                    <p class="tt">Restaurants List</p>
+                    <div class="list">
+                        <ul>
+                            <li v-for="(item, index) in RestaurantsList" :key="index">
+                                <div class="content">
+                                    <a href="javascript:void(0)">
+                                        <img :src="getImgUrl(item.img)" alt="">
+                                        <p>{{ item.name }}</p>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+        <footer>
+            <div class="inner">
+                <ul class="info">
+                    <li>
+                        <a href="http://webgene.com.tw/" target="_blank">
+                            <img class="logo" src="~assets/images/footer_logo.jpg" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <span class="address">台北市106大安區忠孝東路四段325號9樓</span>
+                    </li>
+                </ul>
+
+                <ul class="social">
+                    <li>
+                        <a href="http://blog.webgene.com.tw/" target="_blank">
+                            <img src="~assets/images/icon_blog.png" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.youtube.com/channel/UCfWD3sDng8soxhk1Y0pY7oA" target="_blank">
+                            <img src="~assets/images/icon_youtube.png" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/WebGene" target="_blank">
+                            <img src="~assets/images/icon_fb.png" alt="">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
     </div>
-  </section>
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo.vue'
 
 export default {
-  components: {
-    AppLogo
-  }
-}
+	data() {
+		return {
+			// RestaurantsList: this.$store.state.RestaurantsList,
+			image: {},
+			setting: {
+				price: ['便宜', '普通', '高價'],
+				purpose: ['一般', '慶生', '聚餐'],
+			},
+			randombox: {
+				id: '1',
+				name: '廖嬌米粉湯',
+				img: 'food_02.jpg',
+				price: '普通',
+				purpose: '一般',
+			},
+			state: {
+				burbox: false,
+				switch: 'more',
+				random: false,
+
+				filter: {
+					price: '',
+					purpose: '',
+				},
+			},
+		};
+	},
+};
 </script>
 
-<style>
-.container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
+<style lang="scss">
+@import '~/assets/css/reset.css';
+@import '~/assets/scss/index.scss';
 </style>
 

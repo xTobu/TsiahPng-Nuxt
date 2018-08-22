@@ -1,0 +1,69 @@
+/* Common*/
+
+@font-face {
+    font-family: 'STFangsong';
+    src: url('../assets/font/chinese.stfangso.ttf') format('opentype');
+}
+
+@font-face {
+    font-family: 'NotoSans-Thin';
+    src: url('../assets/font/NotoSans-Thin.ttf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Roboto-Thin';
+    src: url('../assets/font/Roboto-Thin.ttf') format('opentype');
+}
+
+//移除 focus 的邊框
+*:focus {
+    outline: none;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+p,
+span,
+a {
+    letter-spacing: 2px;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+.button {
+    border: 1px solid #d0d0d0;
+    display: inline-block;
+    line-height: 45px;
+    margin: 8px;
+    padding: 0 25px;
+    border-radius: 3px;
+}
+
+body {
+    color: white;
+}
+
+body:before {
+    content: "";
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -10;
+    background: url('../assets/images/bg.jpg') no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.txt p span {
+    display: block;
+}
