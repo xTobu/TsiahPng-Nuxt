@@ -194,7 +194,6 @@
 </template>
 
 <script>
-
 export default {
 	data() {
 		return {
@@ -223,11 +222,141 @@ export default {
 			},
 		};
 	},
+	computed: {
+		// a computed getter
+		RestaurantsList: function() {
+			return this.$store.state.site.RestaurantsList;
+		},
+	},
+	methods: {
+		getImgUrl: function(name) {
+			return require('../assets/images/' + name);
+		},
+		funcGoto(classname) {
+			$('html, body').animate(
+				{
+					scrollTop:
+						$('section.' + classname).offset().top +
+						(window.innerWidth >= 768 ? -75 : 0),
+				},
+				400
+			);
+		},
+
+		funcSwitch() {
+			this.state.switch === 'more'
+				? (this.state.switch = 'less')
+				: (this.state.switch = 'more');
+		},
+
+		funcGetRandom() {
+			let filterPrice = undefined;
+			let filterPurpose = undefined;
+
+			// 如果 setting switch 打開
+			if (this.state.switch !== 'more') {
+				filterPrice = this.state.filter.price;
+				filterPurpose = this.state.filter.purpose;
+			} else {
+				// 如果 setting switch 未打開
+				filterPrice = '';
+				filterPurpose = '';
+			}
+
+			//整理與過濾資料
+			let arrFiltered = this.RestaurantsList.filter(
+				(item, index, array) => {
+					return (
+						item.price.indexOf(filterPrice) > -1 &&
+						item.purpose.indexOf(filterPurpose) > -1
+					);
+				}
+			);
+			// 如果查無資料
+			if (arrFiltered.length === 0) {
+				alert('查無資料');
+				return;
+			}
+
+			// 從陣列裡隨機取出一個, 並填到 this.randombox
+			this.randombox =
+				arrFiltered[Math.floor(Math.random() * arrFiltered.length)];
+
+			//更改 random 顯示與不顯示
+			this.state.random = !this.state.random;
+			this.funcGoto('filter');
+		},
+
+		//Burbox 漢堡選單
+		burboxClick(event) {
+			let el = event.currentTarget;
+			$(el)
+				.attr('tabindex', 1)
+				.focus();
+			this.state.burbox = !this.state.burbox;
+		},
+		burboxFocusout(event) {
+			let el = event.currentTarget;
+			this.state.burbox = false;
+		},
+		// dropdown 下拉選單
+		//點擊
+		dropdownClick(event) {
+			let el = event.currentTarget;
+			$(el)
+				.attr('tabindex', 1)
+				.focus();
+			$(el).toggleClass('active');
+
+			$(el)
+				.find('.dropdown-menu')
+				.slideToggle(300);
+		},
+		// focus 改變圖片
+		dropdownFocus(event) {
+			let el = event.currentTarget;
+			$(el)
+				.find('.inner img')
+				.attr('src', this.getImgUrl('icon_select_up.png'));
+		},
+		// focusout 改變圖片與收合
+		dropdownFocusout(event) {
+			let el = event.currentTarget;
+			$(el).removeClass('active');
+			$(el)
+				.find('.inner img')
+				.attr('src', this.getImgUrl('icon_select_down.png'));
+			$(el)
+				.find('.dropdown-menu')
+				.slideUp(300);
+		},
+		// LiClick 更新資料
+		dropdownLiClick(event) {
+			let el = event.currentTarget;
+			$(el)
+				.parents('.dropdown')
+				.find('span')
+				.text($(el).text());
+			$(el)
+				.parents('.dropdown')
+				.find('.inner img')
+				.attr('src', this.getImgUrl('icon_select_down.png'));
+
+			//更新到 data
+			this.state.filter[$(el).data('filter')] = $(el)
+				.text()
+				.trim();
+		},
+	},
+	created() {
+		this.$store.dispatch('site/getRestaurantList');
+	},
+	mounted() {},
 };
 </script>
 
 <style lang="scss">
-@import '~/assets/css/reset.css';
+// @import '~/assets/css/reset.css';
 @import '~/assets/scss/index.scss';
 </style>
 

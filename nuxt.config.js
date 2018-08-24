@@ -19,10 +19,10 @@ module.exports = {
 		link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
 		script: [
 			{
-				src:
-					'https://code.jquery.com/jquery-3.3.1.min.js',
-			},			
+				src: 'https://code.jquery.com/jquery-3.3.1.min.js',
+			},
 		],
+		css: ['~assets/css/reset.css'],
 	},
 	/*
   ** Customize the progress bar color
@@ -32,6 +32,11 @@ module.exports = {
   ** Build configuration
   */
 	build: {
+		vendor: ['qs'],
+		babel: {
+			presets: ['es2015', 'stage-0'],
+			plugins: ['transform-runtime'],
+		},
 		/*
     ** Run ESLint on save
     */
@@ -45,5 +50,9 @@ module.exports = {
 				});
 			}
 		},
-	},
+    },
+    modules: [
+		'@nuxtjs/axios', // With options
+		'@nuxtjs/proxy',
+    ],
 };
