@@ -351,7 +351,10 @@ export default {
 	created() {
 		this.$store.dispatch('site/getRestaurantList');
 	},
-	mounted() {},
+	mounted() {
+        
+       
+    },
 };
 </script>
 

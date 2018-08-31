@@ -56,6 +56,9 @@ const config = {
 		'@nuxtjs/axios', // With options
 		'@nuxtjs/proxy',
     ],
+    axios: {
+		baseURL: 'http://localhost:8080/api',
+	},
     router: {
 		// 改變基準路徑
 		base: '/',
@@ -67,6 +70,19 @@ const config = {
 			});
 		},
 	
+    },
+    plugins: [
+		{
+			src: '~/plugins/axios',
+			// 因為 fetch 和 asyncData 要用 axios module
+			ssr: true,
+		},
+		
+	],
+    // 增加環境變數
+	env: {
+		API_URL: process.env.NODE_ENV !== 'production' ?
+        'http://localhost:8080/api' : 'http://localhost:8080/api',
 	},
 }
 module.exports = config;

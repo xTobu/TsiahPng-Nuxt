@@ -17,10 +17,10 @@ export const actions = {
 	getRestaurantList(context) {
 		this.$axios
 			.get(
-				'https://easy-mock.com/mock/5b45cffb43b7ef2c8bf92b96/RestaurantsList'
+				'/tsiahpng/RestaurantsList'
 			)
 			.then(response => {
-				context.commit('setRestaurantList', response.data);
+                context.commit('setRestaurantList', response.data.data);
 			});
 	},
 };
