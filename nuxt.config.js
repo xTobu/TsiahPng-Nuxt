@@ -1,4 +1,5 @@
-module.exports = {
+const resolve = require('path').resolve;
+const config = {
 	/*
   ** Headers of the page
   */
@@ -55,4 +56,18 @@ module.exports = {
 		'@nuxtjs/axios', // With options
 		'@nuxtjs/proxy',
     ],
-};
+    router: {
+		// 改變基準路徑
+		base: '/',
+		// 增加 404
+		extendRoutes(routes) {
+			routes.push({
+				path: '*',
+				component: resolve(__dirname, 'pages/404.vue'),
+			});
+		},
+	
+	},
+}
+module.exports = config;
+

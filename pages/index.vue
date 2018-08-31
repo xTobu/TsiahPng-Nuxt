@@ -8,10 +8,10 @@
                             <a href="#" @click.prevent="funcGoto('index')">首　頁</a>
                         </li>
                         <li>
-                            <a href="#" @click.prevent="funcGoto('filter')">篩　選</a>
+                            <a href="#" @click.prevent="funcGoto('filter')">幫我選</a>
                         </li>
                         <li>
-                            <a href="#" @click.prevent="funcGoto('inspired')">找點子</a>
+                            <a href="#" @click.prevent="funcGoto('inspired')">找餐廳</a>
                         </li>
                     </ul>
                 </nav>
