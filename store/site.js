@@ -17,10 +17,10 @@ export const actions = {
 	getRestaurantList(context) {
 		this.$axios
 			.get(
-				'/tsiahpng/RestaurantsList'
+				'/getRestaurantsList'
 			)
 			.then(response => {
-                context.commit('setRestaurantList', response.data.data);
+                context.commit('setRestaurantList', response.data.Restaurants);
 			});
 	},
 };
