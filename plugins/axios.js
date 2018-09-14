@@ -1,5 +1,5 @@
 export default function({ $axios, redirect }) {
-    $axios.baseURL = 'http://localhost:8080/api'
+    $axios.baseURL = 'https://tsiahpng.appspot.com/api'
 	$axios.onRequest(config => {
 		config.headers['Accept'] = 'application/json';
 		config.headers['Content-Type'] =

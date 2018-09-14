@@ -57,7 +57,7 @@ const config = {
 		'@nuxtjs/proxy',
     ],
     axios: {
-		baseURL: 'http://localhost:8080/api',
+		baseURL: 'https://tsiahpng.appspot.com/api',
 	},
     router: {
 		// 改變基準路徑
@@ -82,7 +82,7 @@ const config = {
     // 增加環境變數
 	env: {
 		API_URL: process.env.NODE_ENV !== 'production' ?
-        'http://localhost:8080/api' : 'http://localhost:8080/api',
+        'https://tsiahpng.appspot.com/api' : 'https://tsiahpng.appspot.com/api',
 	},
 }
 module.exports = config;
